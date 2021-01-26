@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<base:BaseContentPage xmlns:base="clr-namespace:DemoApp.Base.Views"
+                      xmlns="http://xamarin.com/schemas/2014/forms"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:converters="clr-namespace:DemoApp.Converters"
+                      xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+                      x:Class="DemoApp.Features.SettingsPage.Views.SettingsPage"
+                      Title="Settings"
+                      TitleImage="logo.svg"
+                      TitleImageHeight="60"
+                      TitleImageWidth="60">
+    <base:BaseContentPage.Resources>
+        <converters:InverseBooleanConverter x:Key="inverter"/>
+    </base:BaseContentPage.Resources>
+    <base:BaseContentPage.Content>
+        <StackLayout Spacing="10"
+                     Padding="16"
+                     BackgroundColor="{DynamicResource SecondaryColor}">
+            <Frame HasShadow="False"
+                   BackgroundColor="{DynamicResource PrimaryColor}"
+                   CornerRadius="3"
+                   Padding="5"
+                   HeightRequest="50">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Enable Scaling"
+                           TextColor="{DynamicResource WhiteColor}"
+                           FontFamily="{StaticResource SourceSansProRegular}"
+                           VerticalOptions="Center"/>
+                    <Switch x:Name="Switch1"
+                            Toggled="OnSwitch1Toggled"
+                            IsEnabled="True"
+                            IsToggled="False"
+                            HorizontalOptions="EndAndExpand"
+                            VerticalOptions="Center"/>
+                </StackLayout>
+            </Frame>
+
+            <BoxView Style="{StaticResource HorizontalSeparator}"
+                     HorizontalOptions="FillAndExpand"
+                     VerticalOptions="End"/>
+
+            <Frame HasShadow="False"
+                   BackgroundColor="{DynamicResource PrimaryColor}"
+                   CornerRadius="3"
+                   Padding="5"
+                   HeightRequest="50">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Enable Location"
+                           TextColor="{DynamicResource WhiteColor}"
+                           FontFamily="{StaticResource SourceSansProRegular}"
+                           VerticalOptions="Center"/>
+                    <Switch x:Name="Switch2"
+                            Toggled="OnSwitch2Toggled"
+                            IsEnabled="True"
+                            IsToggled="False"
+                            HorizontalOptions="EndAndExpand"
+                            VerticalOptions="Center"/>
+                </StackLayout>
+            </Frame>
+
+            <BoxView Style="{StaticResource HorizontalSeparator}"
+                     HorizontalOptions="FillAndExpand"
+                     VerticalOptions="End"/>
+
+            <Frame HasShadow="False"
+                   BackgroundColor="{DynamicResource PrimaryColor}"
+                   CornerRadius="3"
+                   Padding="5"
+                   HeightRequest="50">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Enable something"
+                           TextColor="{DynamicResource WhiteColor}"
+                           FontFamily="{StaticResource SourceSansProRegular}"
+                           VerticalOptions="Center"/>
+                    <Switch x:Name="Switch3"
+                            Toggled="OnSwitch3Toggled"
+                            IsEnabled="True"
+                            IsToggled="False"
+                            HorizontalOptions="EndAndExpand"
+                            VerticalOptions="Center"/>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </base:BaseContentPage.Content>
+</base:BaseContentPage>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<base:BaseContentPage xmlns:base="clr-namespace:DemoApp.Base.Views"
+                      xmlns="http://xamarin.com/schemas/2014/forms"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+                      xmlns:ffimagetransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+                      x:Class="DemoApp.Features.WebViewPage.Views.WebViewPage">
+    <base:BaseContentPage.FrameContent>
+        <WebView x:Name="webView"
+                 HorizontalOptions="Fill"
+                 VerticalOptions="Fill"/>
+    </base:BaseContentPage.FrameContent>
+</base:BaseContentPage>

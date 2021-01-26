@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:DemoApp.Base.Views"
+             xmlns:baseViewModels="clr-namespace:DemoApp.Base.ViewModels;assembly=DemoApp"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:ffimagetransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             x:Class="DemoApp.Base.Views.BaseContentPage"
+             baseViewModels:ViewModelLocator.AutoWireViewModel="true"
+             ios:Page.UseSafeArea="true"
+             BackgroundColor="{StaticResource PrimaryColor}">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding BackCommand}"/>
+    </Shell.BackButtonBehavior>
+    <Shell.TitleView>
+        <Grid x:Name="TitleViewGrid"
+              PropertyChanged="OnTitleViewGridPropertyChanged"
+              ColumnSpacing="0"
+              HorizontalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <StackLayout Grid.Column="0"
+                         Orientation="Horizontal"
+                         HorizontalOptions="Center"
+                         TranslationX="{Binding LogoImageTranslation}">
+                <ffimageloadingsvg:SvgCachedImage x:Name="TitleImageFFImageLoading"
+                                                  BindingContext="{Binding Source={RelativeSource AncestorType={x:Type local:BaseContentPage}}}"
+                                                  Source="{Binding TitleImage}"
+                                                  Margin="4,0"
+                                                  HeightRequest="{Binding TitleImageHeight}"
+                                                  WidthRequest="{Binding TitleImageWidth}"
+                                                  HorizontalOptions="CenterAndExpand"/>
+
+                <Label BindingContext="{Binding Source={RelativeSource AncestorType={x:Type local:BaseContentPage}}}"
+                       Text="{Binding Title}"
+                       TextColor="White"
+                       Style="{StaticResource Headline}"
+                       VerticalTextAlignment="Center"/>
+            </StackLayout>
+            <BoxView x:Name="TitleViewBox"
+                     Grid.Column="1"/>
+        </Grid>
+    </Shell.TitleView>
+    <yummy:PancakeView x:Name="Pancake"
+                       IsClippedToBounds="True"
+                       PropertyChanged="OnPancakePropertyChanged"
+                       BackgroundColor="{DynamicResource SecondaryColor}"
+                       CornerRadius="10, 10, 0, 0"
+                       Padding="0"
+                       VerticalOptions="Fill">
+        <Grid x:Name="BaseGrid"/>
+    </yummy:PancakeView>
+</ContentPage>

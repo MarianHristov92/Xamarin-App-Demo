@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<base:BaseContentPage xmlns:base="clr-namespace:DemoApp.Base.Views"
+                      xmlns="http://xamarin.com/schemas/2014/forms"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      x:Class="DemoApp.Features.LoginPage.Views.LoginPage"
+                      xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+                      xmlns:ffimagetransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+                      xmlns:viewModels="clr-namespace:DemoApp.ViewModels"
+                      Title="Login"
+                      TitleImage="user.svg">
+
+    <base:BaseContentPage.BindingContext>
+        <viewModels:LoginPageViewModel/>
+    </base:BaseContentPage.BindingContext>
+
+    <base:BaseContentPage.FrameContent>
+        <ScrollView VerticalScrollBarVisibility="Never">
+            <Grid Padding="16,50,16,0"
+                  RowSpacing="18"
+                  VerticalOptions="Start">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <!--Email-Address Entry-->
+                <Frame Grid.Row="0"
+                       HasShadow="False"
+                       BackgroundColor="{DynamicResource ForegroundColor}"
+                       Style="{StaticResource EntryFrame}"
+                       Padding="4,0">
+                    <StackLayout Spacing="0"
+                                 Padding="0"
+                                 VerticalOptions="Center">
+                        <Label Text="E-Mail Adress"
+                               Style="{DynamicResource EntryLabel}"
+                               Margin="0"
+                               VerticalOptions="Start">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnEmailAddressFrameTapped"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Entry x:Name="EmailAddressEntry"
+                               AutomationId="EmailAddressEntry"
+                               Keyboard="Email"
+                               ReturnType="Next"
+                               Text="{Binding EmailAddress, Mode=TwoWay}"
+                               Placeholder="marianhrstv@yahoo.com"
+                               PlaceholderColor="{DynamicResource GrayDarkColor}"
+                               Style="{StaticResource FormEntry}"
+                               Margin="0"
+                               VerticalOptions="End"/>
+                    </StackLayout>
+                </Frame>
+                <!--Password Entry-->
+                <Frame Grid.Row="1"
+                       HasShadow="False"
+                       BackgroundColor="{DynamicResource ForegroundColor}"
+                       Style="{DynamicResource EntryFrame}"
+                       Padding="4,0">
+                    <StackLayout Spacing="0"
+                                 Padding="0"
+                                 VerticalOptions="Center">
+                        <Label Text="Password"
+                               Style="{DynamicResource EntryLabel}"
+                               Margin="0"
+                               VerticalOptions="Start">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnPasswordFrameTapped"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <StackLayout Orientation="Horizontal"
+                                     Padding="0"
+                                     Spacing="0">
+                            <Entry x:Name="PasswordEntry"
+                                   AutomationId="PasswordEntry"
+                                   Completed="OnPasswordEntryFinished"
+                                   IsPassword="{Binding PasswordIsHidden}"
+                                   IsSpellCheckEnabled="False"
+                                   IsTextPredictionEnabled="False"
+                                   ReturnType="Done"
+                                   Text="{Binding Password, Mode=TwoWay}"
+                                   Placeholder="Password (min. 8 symbols)"
+                                   PlaceholderColor="{DynamicResource GrayDarkColor}"
+                                   Style="{StaticResource FormEntry}"
+                                   Margin="0"
+                                   HorizontalOptions="FillAndExpand"/>
+                            <ffimageloadingsvg:SvgCachedImage Margin="0, 0, 4, 0"
+                                                              HeightRequest="30"
+                                                              WidthRequest="30"
+                                                              VerticalOptions="Center"
+                                                              HorizontalOptions="End">
+                                <ffimageloadingsvg:SvgCachedImage.Transformations>
+                                    <ffimagetransformations:TintTransformation HexColor="#A6A6A6"
+                                                                       EnableSolidColor="True"/>
+                                </ffimageloadingsvg:SvgCachedImage.Transformations>
+                                <ffimageloadingsvg:SvgCachedImage.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding OnPasswordHideIconTappedCommand}"/>
+                                </ffimageloadingsvg:SvgCachedImage.GestureRecognizers>
+                                <ffimageloadingsvg:SvgCachedImage.Triggers>
+                                    <DataTrigger Binding="{Binding PasswordIsHidden}"
+                                                 TargetType="ffimageloadingsvg:SvgCachedImage"
+                                                 Value="False">
+                                        <Setter Property="Source"
+                                                Value="eye_crossed.svg"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding PasswordIsHidden}"
+                                                 TargetType="ffimageloadingsvg:SvgCachedImage"
+                                                 Value="True">
+                                        <Setter Property="Source"
+                                                Value="eye.svg"/>
+                                    </DataTrigger>
+                                </ffimageloadingsvg:SvgCachedImage.Triggers>
+                            </ffimageloadingsvg:SvgCachedImage>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <!--Password forgotten-->
+                <Label x:Name="PasswordForgottenLabel"
+                       AutomationId="PasswordForgottenLabel"
+                       Grid.Row="2"
+                       Text="Forgot your password?"
+                       TextColor="{StaticResource GrayDarkColor}"
+                       Style="{StaticResource Title}"
+                       Margin="0,-10,0,0"
+                       HorizontalOptions="End"
+                       VerticalOptions="Start">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding PasswordForgottenCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <!--Login Button-->
+                <Button x:Name="LoginButton"
+                        AutomationId="LoginButton"
+                        Grid.Row="3"
+                        Text="Login"
+                        Command="{Binding LoginCommand}"
+                        FontFamily="{StaticResource SourceSansProBold}"
+                        Style="{StaticResource PrimaryButton}"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="StartAndExpand"/>
+
+                <!--Create Account Button-->
+                <Button x:Name="CreateAccountButton"
+                        AutomationId="CreateAccountButton"
+                        Grid.Row="4"
+                        Text="Create Account"
+                        Command="{Binding CreateAccountCommand}"
+                        FontFamily="{StaticResource SourceSansProBold}"
+                        Style="{StaticResource PrimaryButton}"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="StartAndExpand"/>
+            </Grid>
+        </ScrollView>
+    </base:BaseContentPage.FrameContent>
+</base:BaseContentPage>

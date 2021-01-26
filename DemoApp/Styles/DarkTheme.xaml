@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    x:Class="DemoApp.Styles.DarkTheme">
+    
+    <!-- Colors-->
+    <Color x:Key="PrimaryColor">#4A9630</Color>
+    <Color x:Key="SecondaryColor">#F2F2F2</Color>
+    <Color x:Key="ErrorColor">#BA0C2F</Color>
+    <Color x:Key="ForegroundColor">#272727</Color>
+    <Color x:Key="GrayLightColor">#D9D9D9</Color>
+    <Color x:Key="GrayColorEntry">#A6A6A6</Color>
+    <Color x:Key="GrayDarkColor">#F2F2F2</Color>
+    <Color x:Key="GrayDarkestColor">#F2F2F2</Color>
+    <Color x:Key="SwitchOnColor">#4A9630</Color>
+    <Color x:Key="OfflineModeColor">#F2994A</Color>
+    <Color x:Key="WhiteColor">#FFFFFF</Color>
+
+    <!--Fonts-->
+    <OnPlatform x:TypeArguments="x:String" x:Key="SourceSansProBold">
+        <On Platform="Android" Value="SourceSansPro-Bold.ttf#Source Sans Pro" />
+        <On Platform="iOS" Value="SourceSansPro-Bold" />
+    </OnPlatform>
+    <OnPlatform x:TypeArguments="x:String" x:Key="SourceSansProLight">
+        <On Platform="Android" Value="SourceSansPro-Light.ttf#Source Sans Pro" />
+        <On Platform="iOS" Value="SourceSansPro-Light" />
+    </OnPlatform>
+    <OnPlatform x:TypeArguments="x:String" x:Key="SourceSansProRegular">
+        <On Platform="Android" Value="SourceSansPro-Regular.ttf#Source Sans Pro" />
+        <On Platform="iOS" Value="SourceSansPro-Regular" />
+    </OnPlatform>
+    <OnPlatform x:TypeArguments="x:String" x:Key="SourceSansProSemiBold">
+        <On Platform="Android" Value="SourceSansPro-SemiBold.ttf#Source Sans Pro" />
+        <On Platform="iOS" Value="SourceSansPro-SemiBold" />
+    </OnPlatform>
+
+    <!--Separator Horizontal-->
+    <Style
+        x:Key="HorizontalSeparator"
+        TargetType="BoxView">
+        <Setter
+            Property="HeightRequest"
+            Value="1" />
+        <Setter
+            Property="BackgroundColor"
+            Value="{StaticResource GrayColorEntry}"/>
+    </Style>
+    
+    <!--Buttons-->
+    <Style x:Key="PrimaryButton"
+            TargetType="Button">
+        <Setter Property="BackgroundColor"
+                Value="{DynamicResource PrimaryColor}"/>
+        <Setter Property="BorderColor"
+                Value="{DynamicResource PrimaryColor}"/>
+        <Setter Property="CornerRadius"
+                Value="5"/>
+        <Setter Property="FontFamily"
+                Value="{StaticResource SourceSansProBold}"/>
+        <Setter Property="FontSize"
+                Value="16"/>
+        <Setter Property="HeightRequest"
+                Value="40"/>
+        <Setter Property="TextColor"
+                Value="White"/>
+    </Style>
+
+    <!--Labels-->
+    <Style x:Key="Headline"
+            TargetType="Label">
+        <Setter Property="FontFamily"
+                Value="{StaticResource SourceSansProBold}"/>
+        <Setter Property="FontSize"
+                Value="18"/>
+    </Style>
+    <Style x:Key="SubHeadline"
+            TargetType="Label">
+        <Setter Property="FontFamily"
+                Value="{StaticResource SourceSansProBold}"/>
+        <Setter Property="FontSize"
+                Value="16"/>
+    </Style>
+    <Style x:Key="Title"
+            TargetType="Label">
+        <Setter Property="FontFamily"
+                Value="{StaticResource SourceSansProBold}"/>
+        <Setter Property="FontSize"
+                Value="14"/>
+    </Style>
+
+    <Style x:Key="EntryLabel"
+            TargetType="Label">
+        <Setter Property="FontFamily"
+                Value="{StaticResource SourceSansProRegular}"/>
+        <Setter Property="FontSize"
+                Value="12"/>
+        <Setter Property="TextColor"
+                Value="{DynamicResource GrayColorEntry}"/>
+    </Style>
+
+    <!--Frames-->
+    <Style x:Key="EntryFrame"
+            TargetType="Frame">
+        <Setter Property="BackgroundColor"
+                Value="{StaticResource WhiteColor}"/>
+        <Setter Property="BorderColor"
+                Value="{DynamicResource GrayLightColor}"/>
+        <Setter Property="CornerRadius"
+                Value="4"/>
+    </Style>
+
+    <!--Entries-->
+    <Style x:Key="FormEntry"
+            TargetType="Entry">
+        <Setter Property="TextColor"
+                Value="{DynamicResource GrayDarkColor}"/>
+        <Setter Property="FontFamily"
+                Value="{StaticResource SourceSansProRegular}"/>
+        <Setter Property="FontSize"
+                Value="16"/>
+    </Style>
+
+</ResourceDictionary>

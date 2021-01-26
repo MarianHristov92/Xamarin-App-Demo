@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:DemoApp.Features.MainPage.ViewModels"
+    xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    x:Class="DemoApp.Features.MainPage.Views.MainPageItemView">
+    <ContentView.Content>
+        <Frame
+            x:Name="MainPageViewFrame"
+            HasShadow="False"
+            HeightRequest="160"
+            WidthRequest="160"
+            IsClippedToBounds="True" 
+            BackgroundColor="{DynamicResource PrimaryColor}"
+            CornerRadius="10"
+            Margin="8"
+            Padding="0,0,0,0">
+        <StackLayout Spacing="0">
+            <ffimageloadingsvg:SvgCachedImage
+                HeightRequest="80"
+                WidthRequest="80"
+                x:Name="MainItemIcon"
+                Source="folder-star.svg"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand"/>
+            <Label 
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Start"
+                VerticalOptions="StartAndExpand"
+                Text="{Binding Name}"
+                TextColor="{DynamicResource WhiteColor}"
+                FontAttributes="Bold"
+                FontFamily="{StaticResource SourceSansProSemiBold}"
+                FontSize="14"
+                LineBreakMode="TailTruncation"
+                MaxLines="1"
+                Margin="16, 0, 16, 8"/>
+        </StackLayout>
+        <Frame.GestureRecognizers>
+            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:MainPageViewModel}}, Path=OnItemTappedCommand}"
+                                  CommandParameter="{Binding .}"/>
+        </Frame.GestureRecognizers>
+    </Frame>
+    </ContentView.Content>
+</ContentView>

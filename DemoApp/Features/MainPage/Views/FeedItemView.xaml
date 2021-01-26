@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:ffimagetransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:viewModels="clr-namespace:DemoApp.Features.MainPage.ViewModels"
+             x:Class="DemoApp.Features.MainPage.Views.FeedItemView">
+    <Frame
+        BackgroundColor="{DynamicResource ForegroundColor}"
+        HasShadow="False"
+        IsClippedToBounds="True"
+        CornerRadius="10"
+        Margin="0,10,0,0"
+        Padding="0">
+        <StackLayout
+            Spacing="0">
+            <ffimageloading:CachedImage Source="{Binding FeedItemImageUrl}"
+                                        Aspect="AspectFill">
+                <ffimageloading:CachedImage.Transformations>
+                    <ffimagetransformations:RoundedTransformation
+                        Radius="10"
+                        CropHeightRatio="20"
+                        CropWidthRatio="37"/>
+                </ffimageloading:CachedImage.Transformations>
+            </ffimageloading:CachedImage>
+            <Label Text="{Binding FeedItemText}"
+                   TextColor="{DynamicResource GrayDarkestColor}"
+                   Style="{StaticResource SubHeadline}"
+                   Padding="18,5"/>
+        </StackLayout>
+        <Frame.GestureRecognizers>
+            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:MainPageViewModel}}, Path=OnFeedItemTappedCommand}"
+                                  CommandParameter="{Binding .}"/>
+        </Frame.GestureRecognizers>
+    </Frame>
+</ContentView>

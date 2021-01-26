@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<base:BaseContentPage xmlns:base="clr-namespace:DemoApp.Base.Views"
+                      xmlns="http://xamarin.com/schemas/2014/forms"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:converters="clr-namespace:DemoApp.Converters"
+                      xmlns:data="clr-namespace:DemoApp.Data"
+                      xmlns:views="clr-namespace:DemoApp.Features.MainPage.Views"
+                      x:Class="DemoApp.Features.MainPage.Views.MainPage"
+                      Title="Main Page"
+                      TitleImage="logo.svg"
+                      TitleImageHeight="60"
+                      TitleImageWidth="60">
+    <base:BaseContentPage.Resources>
+        <converters:InverseBooleanConverter x:Key="inverter"/>
+    </base:BaseContentPage.Resources>
+    <base:BaseContentPage.FrameContent>
+            <ScrollView VerticalScrollBarVisibility="Never">
+                <Grid RowSpacing="0"
+                      VerticalOptions="StartAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackLayout
+                        Grid.Row="0"
+                        VerticalOptions="Start">
+                        <StackLayout.Margin>
+                            <OnPlatform x:TypeArguments="Thickness">
+                                <OnPlatform.Platforms>
+                                    <On Platform="iOS" Value="16,20,16,5" />
+                                    <On Platform="Android" Value="0" />
+                                </OnPlatform.Platforms>
+                            </OnPlatform>
+                        </StackLayout.Margin>
+
+                        <Label
+                            StyleClass="SubHeadline"
+                            FontFamily="{StaticResource SourceSansProBold}"
+                            Text="Complete Websites"
+                            VerticalOptions="End"/>
+        
+                        <BoxView
+                            Style="{ StaticResource HorizontalSeparator}"
+                            BackgroundColor="{StaticResource GrayDarkColor}"
+                            VerticalOptions="End"/>
+                    </StackLayout>
+
+                    <StackLayout Grid.Row="1"
+                                 Margin="16,16,16,8"
+                                 BindableLayout.ItemsSource="{Binding FeedItemsList}"
+                                 Spacing="10">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <views:FeedItemView/>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+
+
+                    <StackLayout
+                        Grid.Row="2"
+                        VerticalOptions="Start">
+                        <StackLayout.Margin>
+                            <OnPlatform x:TypeArguments="Thickness">
+                                <OnPlatform.Platforms>
+                                    <On Platform="iOS" Value="16,20,16,5" />
+                                    <On Platform="Android" Value="0" />
+                                </OnPlatform.Platforms>
+                            </OnPlatform>
+                        </StackLayout.Margin>
+
+                        <Label
+                            StyleClass="SubHeadline"
+                            FontFamily="{StaticResource SourceSansProBold}"
+                            Text="App Pages"
+                            VerticalOptions="End"/>
+        
+                        <BoxView
+                            Style="{StaticResource HorizontalSeparator}"
+                            BackgroundColor="{StaticResource GrayDarkColor}"
+                            VerticalOptions="End"/>
+                    </StackLayout>
+
+                    <CollectionView Grid.Row="3"
+                                    ItemsSource="{x:Static data:MainPageData.MainDataList}"
+                                    Margin="8,16,8,8"
+                                    ItemSizingStrategy="MeasureFirstItem">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical"
+                                             Span="2" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <views:MainPageItemView/>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+            </ScrollView>        
+    </base:BaseContentPage.FrameContent>
+</base:BaseContentPage>
+    

@@ -1,0 +1,84 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.1905" />  
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="TinyIoC" Version="1.3.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Microsoft.AppCenter" Version="4.1.0" />
+    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="4.1.0" />
+    <PackageReference Include="Xamarin.Forms.PancakeView" Version="2.3.0.759" />
+    <PackageReference Include="Mapsui.Forms" Version="2.0.3" />
+    <PackageReference Include="Acr.UserDialogs" Version="7.1.0.470" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Base\" />
+    <Folder Include="Base\Views\" />
+    <Folder Include="Base\ViewModels\" />
+    <Folder Include="Base\Models\" />
+    <Folder Include="Behaviors\" />
+    <Folder Include="Behaviors\Base\" />
+    <Folder Include="Converters\" />
+    <Folder Include="Features\" />
+    <Folder Include="Styles\" />
+    <Folder Include="Validations\" />
+    <Folder Include="Validations\Interfaces\" />
+    <Folder Include="Features\MainPage\" />
+    <Folder Include="Features\MainPage\Models\" />
+    <Folder Include="Features\MainPage\ViewModels\" />
+    <Folder Include="Features\MainPage\Views\" />
+    <Folder Include="Features\AboutPage\" />
+    <Folder Include="Features\SettingsPage\" />
+    <Folder Include="Features\LoginPage\" />
+    <Folder Include="Features\LoginPage\ViewModels\" />
+    <Folder Include="Features\LoginPage\Views\" />
+    <Folder Include="Data\" />
+    <Folder Include="Features\AboutPage\Views\" />
+    <Folder Include="Features\AboutPage\ViewModels\" />
+    <Folder Include="Features\SettingsPage\Views\" />
+    <Folder Include="Features\SettingsPage\ViewModels\" />
+    <Folder Include="Base\Display\" />
+    <Folder Include="Features\WebViewPage\" />
+    <Folder Include="Features\WebViewPage\Views\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EventBus\EventBus.csproj" />
+    <ProjectReference Include="..\DemoApp.Web\DemoAppBackendApi.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="Features\MainPage\Views\ItemDetailPage.xaml" />
+    <EmbeddedResource Remove="Features\LoginPage\Views\ItemsPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Features\LoginPage\Views\AboutPage.xaml.cs" />
+    <Compile Remove="Features\LoginPage\Views\ItemDetailPage.xaml.cs" />
+    <Compile Remove="Features\AboutPage\AboutPage.xaml.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Features\LoginPage\Views\ItemsPage.xaml">
+      <LogicalName>Features.LoginPage.Views.ItemsPage.xaml</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Features\AboutPage\Views\AboutPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Features\MainPage\Views\FeedItemView.xaml.cs">
+      <DependentUpon>FeedItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Features\WebViewPage\Views\WebViewPage.xaml.cs">
+      <DependentUpon>WebViewPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+</Project>

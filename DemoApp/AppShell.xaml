@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms" 
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:converters="clr-namespace:DemoApp.Converters"
+       xmlns:baseViewModels="clr-namespace:DemoApp.Base.ViewModels;assembly=DemoApp"
+       xmlns:MainPageViews="clr-namespace:DemoApp.Features.MainPage.Views"
+       xmlns:SettingsViews="clr-namespace:DemoApp.Features.SettingsPage.Views"
+       xmlns:LoginViews="clr-namespace:DemoApp.Features.LoginPage.Views"
+       xmlns:AboutViews="clr-namespace:DemoApp.Features.AboutPage.Views"
+       Title="DemoApp"
+       x:Class="DemoApp.AppShell"
+       baseViewModels:ViewModelLocator.AutoWireViewModel="True"
+       Shell.TabBarIsVisible="False"
+       Shell.NavBarHasShadow="False"
+       FlyoutBackgroundColor="{DynamicResource SecondaryColor}">
+<Shell.Resources>
+        <Style x:Key="BaseStyle" TargetType="Element">
+            <Setter Property="Shell.BackgroundColor" Value="{StaticResource PrimaryColor}"/>
+            <Setter Property="Shell.ForegroundColor" Value="{StaticResource SecondaryColor}"/>
+        </Style>
+        <converters:InverseBooleanConverter x:Key="inverter"/>
+    </Shell.Resources>
+
+    <FlyoutItem
+        FlyoutDisplayOptions="AsMultipleItems"
+        Style="{StaticResource BaseStyle}">
+
+        <ShellContent Route="MainPage"
+                      ContentTemplate="{DataTemplate MainPageViews:MainPage}">
+            <Shell.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout 
+                                 Orientation="Horizontal"
+                                 HeightRequest="50">
+                        <Label Text="Main Page"
+                               FontFamily="{StaticResource SourceSansProRegular}"
+                               FontSize="18"
+                               Margin="10, 0, 0, 0"
+                               HorizontalOptions="Start"
+                               VerticalOptions="Center"
+                               HorizontalTextAlignment="Start"
+                               VerticalTextAlignment="Center"/>
+                    </StackLayout>
+                </DataTemplate>
+            </Shell.ItemTemplate>
+        </ShellContent>
+
+        <ShellContent Route="LoginPage"
+                      ContentTemplate="{DataTemplate LoginViews:LoginPage}">
+            <Shell.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout 
+                                 Orientation="Horizontal"
+                                 HeightRequest="50">
+                        <Label Text="Login"
+                               FontFamily="{StaticResource SourceSansProRegular}"
+                               FontSize="18"
+                               Margin="10, 0, 0, 0"
+                               HorizontalOptions="Start"
+                               VerticalOptions="Center"
+                               HorizontalTextAlignment="Start"
+                               VerticalTextAlignment="Center"/>
+                    </StackLayout>
+                </DataTemplate>
+            </Shell.ItemTemplate>
+        </ShellContent>
+
+        <ShellContent Route="SettingsPage"
+                      ContentTemplate="{DataTemplate SettingsViews:SettingsPage}">
+            <Shell.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout 
+                                 Orientation="Horizontal"
+                                 HeightRequest="50">
+                        <Label Text="Settings"
+                               FontFamily="{StaticResource SourceSansProRegular}"
+                               FontSize="18"
+                               Margin="10, 0, 0, 0"
+                               HorizontalOptions="Start"
+                               VerticalOptions="Center"
+                               HorizontalTextAlignment="Start"
+                               VerticalTextAlignment="Center"/>
+                    </StackLayout>
+                </DataTemplate>
+            </Shell.ItemTemplate>
+        </ShellContent>
+        
+        <ShellContent Route="AboutPage"
+                      ContentTemplate="{DataTemplate AboutViews:AboutPage}">
+            <Shell.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout 
+                                 Orientation="Horizontal"
+                                 HeightRequest="50">
+                        <Label Text="About"
+                               FontFamily="{StaticResource SourceSansProRegular}"
+                               FontSize="18"
+                               Margin="10, 0, 0, 0"
+                               HorizontalOptions="Start"
+                               VerticalOptions="Center"
+                               HorizontalTextAlignment="Start"
+                               VerticalTextAlignment="Center"/>
+                    </StackLayout>
+                </DataTemplate>
+            </Shell.ItemTemplate>
+        </ShellContent>
+
+    </FlyoutItem>
+</Shell>

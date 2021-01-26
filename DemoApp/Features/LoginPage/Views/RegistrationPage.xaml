@@ -1,0 +1,553 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<base:BaseContentPage xmlns:base="clr-namespace:DemoApp.Base.Views"
+                      xmlns="http://xamarin.com/schemas/2014/forms"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:behaviors="clr-namespace:DemoApp.Behaviors;assembly=DemoApp"
+                      xmlns:converters="clr-namespace:DemoApp.Converters;assembly=DemoApp"
+                      xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+                      xmlns:ffimagetransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+                      x:Class="DemoApp.Features.LoginPage.Views.RegistrationPage"
+                      Title="Register"
+                      TitleImage="user.svg">
+    <base:BaseContentPage.Resources>
+        <ResourceDictionary>
+            <converters:EventParameterConverter x:Key="EventParameterConverter" />
+        </ResourceDictionary>
+    </base:BaseContentPage.Resources>
+    <base:BaseContentPage.FrameContent>
+        <ScrollView VerticalScrollBarVisibility="Never">
+            <Grid Padding="16,70,16,0" RowSpacing="18">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="90"/>
+                </Grid.RowDefinitions>
+                <Frame Grid.Row="0"
+                       HasShadow="False"
+                       BackgroundColor="{DynamicResource ForegroundColor}"
+                       Style="{StaticResource EntryFrame}">
+                    <Frame.Triggers>
+                        <DataTrigger Binding="{Binding Gender.IsValid}"
+                                     TargetType="Frame"
+                                     Value="False">
+                            <Setter Property="BorderColor"
+                                    Value="{StaticResource ErrorColor}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Gender.IsValid}"
+                                     TargetType="Frame"
+                                     Value="True">
+                            <Setter Property="BorderColor"
+                                    Value="{StaticResource GrayLightColor}"/>
+                        </DataTrigger>
+                    </Frame.Triggers>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnGenderFrameTapped"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+                <Label Grid.Row="0"
+                       Text="{Binding GenderLabelText}"
+                       Style="{StaticResource EntryLabel}"
+                       Margin="11,6,0,0"
+                       VerticalOptions="Start">
+                    <Label.Triggers>
+                        <DataTrigger Binding="{Binding Gender.IsValid}"
+                                     TargetType="Label"
+                                     Value="False">
+                            <Setter Property="TextColor"
+                                    Value="{StaticResource ErrorColor}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Gender.IsValid}"
+                                     TargetType="Label"
+                                     Value="True">
+                            <Setter Property="TextColor"
+                                    Value="{StaticResource GrayColorEntry}"/>
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+                <Picker x:Name="GenderPicker"
+                        AutomationId="GenderPicker"
+                        Grid.Row="0"
+                        SelectedItem="{Binding Gender.Value, Mode=TwoWay}"
+                        Title="Please select..."
+                        TitleColor="{DynamicResource GrayDarkColor}"
+                        BackgroundColor="Transparent"
+                        TextColor="{DynamicResource GrayDarkColor}"
+                        Margin="10,0,0,7"
+                        VerticalOptions="End">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Madam</x:String>
+                            <x:String>Sir</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                    <Picker.Behaviors>
+                        <behaviors:EventToCommandBehavior
+                            EventName="Unfocused"
+                            EventParameterConverter="{StaticResource EventParameterConverter}"
+                            Command="{Binding ValidateGenderCommand}"/>
+                    </Picker.Behaviors>
+                </Picker>
+                <!--FirstName Entry-->
+                <Frame x:Name="FirstNameFrame"
+                       BackgroundColor="{DynamicResource ForegroundColor}"
+                       Grid.Row="1"
+                       HasShadow="False"
+                       Style="{StaticResource EntryFrame}">
+                    <Frame.Triggers>
+                        <DataTrigger Binding="{Binding FirstName.IsValid}"
+                                     TargetType="Frame"
+                                     Value="False">
+                            <Setter Property="BorderColor"
+                                    Value="{StaticResource ErrorColor}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding FirstName.IsValid}"
+                                     TargetType="Frame"
+                                     Value="True">
+                            <Setter Property="BorderColor"
+                                    Value="{StaticResource GrayLightColor}"/>
+                        </DataTrigger>
+                    </Frame.Triggers>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnFirstNameFrameTapped"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+                <Label x:Name="FirstNameLabel"
+                       AutomationId="FirstNameLabel"
+                       Grid.Row="1"
+                       Text="{Binding FirstNameLabelText}"
+                       Style="{StaticResource EntryLabel}"
+                       Margin="11,6,0,0"
+                       VerticalOptions="Start">
+                    <Label.Triggers>
+                        <DataTrigger Binding="{Binding FirstName.IsValid}"
+                                     TargetType="Label"
+                                     Value="False">
+                            <Setter Property="TextColor"
+                                    Value="{StaticResource ErrorColor}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding FirstName.IsValid}"
+                                     TargetType="Label"
+                                     Value="True">
+                            <Setter Property="TextColor"
+                                    Value="{StaticResource GrayColorEntry}"/>
+                        </DataTrigger>
+                    </Label.Triggers>
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnFirstNameFrameTapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Entry x:Name="FirstNameEntry"
+                       AutomationId="FirstNameEntry"
+                       Grid.Row="1"
+                       Keyboard="Text"
+                       ReturnType="Next"
+                       Text="{Binding FirstName.Value, Mode=TwoWay}"
+                       Placeholder="Marian"
+                       PlaceholderColor="{DynamicResource GrayDarkColor}"
+                       Style="{StaticResource FormEntry}"
+                       Margin="10,0,0,7"
+                       VerticalOptions="End">
+                    <Entry.Behaviors>
+                        <behaviors:EventToCommandBehavior
+                            EventName="TextChanged"
+                            EventParameterConverter="{StaticResource EventParameterConverter}"
+                            Command="{Binding ValidateFirstNameCommand}" />
+                    </Entry.Behaviors>
+                </Entry>
+                <!--LastName Entry-->
+                <Frame Grid.Row="2"
+                       HasShadow="False"
+                       BackgroundColor="{DynamicResource ForegroundColor}"
+                       Style="{StaticResource EntryFrame}">
+                    <Frame.Triggers>
+                        <DataTrigger Binding="{Binding LastName.IsValid}"
+                                     TargetType="Frame"
+                                     Value="False">
+                            <Setter Property="BorderColor"
+                                    Value="{StaticResource ErrorColor}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding LastName.IsValid}"
+                                     TargetType="Frame"
+                                     Value="True">
+                            <Setter Property="BorderColor"
+                                    Value="{StaticResource GrayLightColor}"/>
+                        </DataTrigger>
+                    </Frame.Triggers>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnLastNameFrameTapped"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+                <Label x:Name="LastNameLabel"
+                       AutomationId="LastNameLabel"
+                       Grid.Row="2"
+                       Text="{Binding LastNameLabelText}"
+                       Style="{StaticResource EntryLabel}"
+                       Margin="11,6,0,0"
+                       VerticalOptions="Start">
+                    <Label.Triggers>
+                        <DataTrigger Binding="{Binding LastName.IsValid}"
+                                     TargetType="Label"
+                                     Value="False">
+                            <Setter Property="TextColor"
+                                    Value="{StaticResource ErrorColor}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding LastName.IsValid}"
+                                     TargetType="Label"
+                                     Value="True">
+                            <Setter Property="TextColor"
+                                    Value="{StaticResource GrayColorEntry}"/>
+                        </DataTrigger>
+                    </Label.Triggers>
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnLastNameFrameTapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Entry x:Name="LastNameEntry"
+                       AutomationId="LastNameEntry"
+                       Grid.Row="2"
+                       Keyboard="Text"
+                       ReturnType="Next"
+                       Text="{Binding LastName.Value, Mode=TwoWay}"
+                       Placeholder="Hristov"
+                       PlaceholderColor="{DynamicResource GrayDarkColor}"
+                       Style="{StaticResource FormEntry}"
+                       Margin="10,0,0,7"
+                       VerticalOptions="End">
+                    <Entry.Behaviors>
+                        <behaviors:EventToCommandBehavior
+                            EventName="TextChanged"
+                            EventParameterConverter="{StaticResource EventParameterConverter}"
+                            Command="{Binding ValidateLastNameCommand}" />
+                    </Entry.Behaviors>
+                </Entry>
+                <!--Email-Address Entry-->
+                <Frame Grid.Row="3"
+                       HasShadow="False"
+                       BackgroundColor="{DynamicResource ForegroundColor}"
+                       Style="{StaticResource EntryFrame}">
+                    <Frame.Triggers>
+                        <DataTrigger Binding="{Binding Email.IsValid}"
+                                     TargetType="Frame"
+                                     Value="False">
+                            <Setter Property="BorderColor"
+                                    Value="{StaticResource ErrorColor}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Email.IsValid}"
+                                     TargetType="Frame"
+                                     Value="True">
+                            <Setter Property="BorderColor"
+                                    Value="{StaticResource GrayLightColor}"/>
+                        </DataTrigger>
+                    </Frame.Triggers>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnEmailAddressFrameTapped"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+                <Label x:Name="EmailAddressLabel"
+                       AutomationId="EmailAddressLabel"
+                       Grid.Row="3"
+                       Text="{Binding EmailLabelText}"
+                       Style="{StaticResource EntryLabel}"
+                       Margin="11,6,0,0"
+                       VerticalOptions="Start">
+                    <Label.Triggers>
+                        <DataTrigger Binding="{Binding Email.IsValid}"
+                                     TargetType="Label"
+                                     Value="False">
+                            <Setter Property="TextColor"
+                                    Value="{StaticResource ErrorColor}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Email.IsValid}"
+                                     TargetType="Label"
+                                     Value="True">
+                            <Setter Property="TextColor"
+                                    Value="{StaticResource GrayColorEntry}"/>
+                        </DataTrigger>
+                    </Label.Triggers>
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnEmailAddressFrameTapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Entry x:Name="EmailAddressEntry"
+                       AutomationId="EmailAddressEntry"
+                       Grid.Row="3"
+                       Keyboard="Email"
+                       ReturnType="Next"
+                       Text="{Binding Email.Value, Mode=TwoWay}"
+                       Placeholder="marianhrstv@yahoo.com"
+                       PlaceholderColor="{DynamicResource GrayDarkColor}"
+                       Style="{StaticResource FormEntry}"
+                       Margin="10,0,0,7"
+                       VerticalOptions="End">
+                    <Entry.Behaviors>
+                        <behaviors:EventToCommandBehavior
+                            EventName="TextChanged"
+                            EventParameterConverter="{StaticResource EventParameterConverter}"
+                            Command="{Binding ValidateEmailCommand}" />
+                    </Entry.Behaviors>
+                </Entry>
+                <!--Password Entry-->
+                <Frame Grid.Row="4"
+                       HasShadow="False"
+                       BackgroundColor="{DynamicResource ForegroundColor}"
+                       Style="{StaticResource EntryFrame}">
+                    <Frame.Triggers>
+                        <DataTrigger Binding="{Binding Password.IsValid}"
+                                     TargetType="Frame"
+                                     Value="False">
+                            <Setter Property="BorderColor"
+                                    Value="{StaticResource ErrorColor}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Password.IsValid}"
+                                     TargetType="Frame"
+                                     Value="True">
+                            <Setter Property="BorderColor"
+                                    Value="{StaticResource GrayLightColor}"/>
+                        </DataTrigger>
+                    </Frame.Triggers>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnPasswordFrameTapped"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+                <StackLayout Grid.Row="4"
+                             Orientation="Horizontal">
+                    <Entry x:Name="PasswordEntry"
+                           AutomationId="PasswordEntry"
+                           ReturnType="Next"
+                           IsPassword="{Binding PasswordIsHidden}"
+                           IsSpellCheckEnabled="False"
+                           IsTextPredictionEnabled="False"
+                           Text="{Binding Password.Value, Mode=TwoWay}"
+                           Placeholder="Password (min. 8 symbols)"
+                           PlaceholderColor="{DynamicResource GrayDarkColor}"
+                           Style="{StaticResource FormEntry}"
+                           Margin="10,0,0,7"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="End">
+                        <Entry.Behaviors>
+                            <behaviors:EventToCommandBehavior
+                                EventName="TextChanged"
+                                EventParameterConverter="{StaticResource EventParameterConverter}"
+                                Command="{Binding ValidatePasswordCommand}" />
+                        </Entry.Behaviors>
+                    </Entry>
+                    <ffimageloadingsvg:SvgCachedImage Source="eye_crossed.svg"
+                                                      Margin="0, 0, 8, 0"
+                                                      HeightRequest="30"
+                                                      WidthRequest="30"
+                                                      VerticalOptions="Center"
+                                                      HorizontalOptions="End">
+                        <ffimageloadingsvg:SvgCachedImage.Transformations>
+                            <ffimagetransformations:TintTransformation HexColor="#A6A6A6"
+                                                                       EnableSolidColor="True"/>
+                        </ffimageloadingsvg:SvgCachedImage.Transformations>
+                        <ffimageloadingsvg:SvgCachedImage.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OnPasswordHideIconTappedCommand}"/>
+                        </ffimageloadingsvg:SvgCachedImage.GestureRecognizers>
+                        <ffimageloadingsvg:SvgCachedImage.Triggers>
+                            <DataTrigger Binding="{Binding PasswordIsHidden}"
+                                         TargetType="ffimageloadingsvg:SvgCachedImage"
+                                         Value="False">
+                                <Setter Property="Source"
+                                        Value="eye_crossed.svg"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding PasswordIsHidden}"
+                                         TargetType="ffimageloadingsvg:SvgCachedImage"
+                                         Value="True">
+                                <Setter Property="Source"
+                                        Value="eye.svg"/>
+                            </DataTrigger>
+                        </ffimageloadingsvg:SvgCachedImage.Triggers>
+                    </ffimageloadingsvg:SvgCachedImage>
+                </StackLayout>
+                <Label x:Name="PasswordLabel"
+                       AutomationId="PasswordLabel"
+                       Grid.Row="4"
+                       Text="{Binding PasswordLabelText}"
+                       Style="{StaticResource EntryLabel}"
+                       Margin="11,6,0,0"
+                       VerticalOptions="Start">
+                    <Label.Triggers>
+                        <DataTrigger Binding="{Binding Password.IsValid}"
+                                     TargetType="Label"
+                                     Value="False">
+                            <Setter Property="TextColor"
+                                    Value="{StaticResource ErrorColor}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Password.IsValid}"
+                                     TargetType="Label"
+                                     Value="True">
+                            <Setter Property="TextColor"
+                                    Value="{StaticResource GrayColorEntry}"/>
+                        </DataTrigger>
+                    </Label.Triggers>
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnPasswordFrameTapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <!--Repeat Password Entry-->
+                <Frame Grid.Row="5"
+                       BackgroundColor="{DynamicResource ForegroundColor}"
+                       HasShadow="False"
+                       Style="{StaticResource EntryFrame}">
+                    <Frame.Triggers>
+                        <DataTrigger Binding="{Binding RepeatPassword.IsValid}"
+                                     TargetType="Frame"
+                                     Value="False">
+                            <Setter Property="BorderColor"
+                                    Value="{StaticResource ErrorColor}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding RepeatPassword.IsValid}"
+                                     TargetType="Frame"
+                                     Value="True">
+                            <Setter Property="BorderColor"
+                                    Value="{StaticResource GrayLightColor}"/>
+                        </DataTrigger>
+                    </Frame.Triggers>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnRepeatPasswordFrameTapped"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+                <StackLayout Grid.Row="5"
+                             Orientation="Horizontal">
+                    <Entry x:Name="RepeatPasswordEntry"
+                           AutomationId="RepeatPasswordEntry"
+                           ReturnType="Done"
+                           IsPassword="{Binding RepeatPasswordIsHidden}"
+                           IsSpellCheckEnabled="False"
+                           IsTextPredictionEnabled="False"
+                           Text="{Binding RepeatPassword.Value, Mode=TwoWay}"
+                           Placeholder="Password (min. 8 symbols)"
+                           PlaceholderColor="{DynamicResource GrayDarkColor}"
+                           Style="{StaticResource FormEntry}"
+                           Margin="10,0,0,7"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="End">
+                        <Entry.Behaviors>
+                            <behaviors:EventToCommandBehavior
+                                EventName="TextChanged"
+                                EventParameterConverter="{StaticResource EventParameterConverter}"
+                                Command="{Binding ValidateRepeatPasswordCommand}" />
+                        </Entry.Behaviors>
+                    </Entry>
+                    <ffimageloadingsvg:SvgCachedImage Margin="0, 0, 8, 0"
+                                                      HeightRequest="30"
+                                                      WidthRequest="30"
+                                                      VerticalOptions="Center"
+                                                      HorizontalOptions="End">
+                        <ffimageloadingsvg:SvgCachedImage.Transformations>
+                            <ffimagetransformations:TintTransformation HexColor="#A6A6A6"
+                                                                       EnableSolidColor="True"/>
+                        </ffimageloadingsvg:SvgCachedImage.Transformations>
+                        <ffimageloadingsvg:SvgCachedImage.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OnRepeatPasswordHideIconTappedCommand}"/>
+                        </ffimageloadingsvg:SvgCachedImage.GestureRecognizers>
+                        <ffimageloadingsvg:SvgCachedImage.Triggers>
+                            <DataTrigger Binding="{Binding RepeatPasswordIsHidden}"
+                                         TargetType="ffimageloadingsvg:SvgCachedImage"
+                                         Value="False">
+                                <Setter Property="Source"
+                                        Value="eye_crossed.svg"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding RepeatPasswordIsHidden}"
+                                         TargetType="ffimageloadingsvg:SvgCachedImage"
+                                         Value="True">
+                                <Setter Property="Source"
+                                        Value="eye.svg"/>
+                            </DataTrigger>
+                        </ffimageloadingsvg:SvgCachedImage.Triggers>
+                    </ffimageloadingsvg:SvgCachedImage>
+                </StackLayout>
+                <Label x:Name="RepeatPasswordLabel"
+                       AutomationId="RepeatPasswordLabel"
+                       Grid.Row="5"
+                       Text="{Binding RepeatPasswordLabelText}"
+                       Style="{StaticResource EntryLabel}"
+                       Margin="11,6,0,0"
+                       VerticalOptions="Start">
+                    <Label.Triggers>
+                        <DataTrigger Binding="{Binding RepeatPassword.IsValid}"
+                                     TargetType="Label"
+                                     Value="False">
+                            <Setter Property="TextColor"
+                                    Value="{StaticResource ErrorColor}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding RepeatPassword.IsValid}"
+                                     TargetType="Label"
+                                     Value="True">
+                            <Setter Property="TextColor"
+                                    Value="{StaticResource GrayColorEntry}"/>
+                        </DataTrigger>
+                    </Label.Triggers>
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnRepeatPasswordFrameTapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <!--Agreement Switch & Label-->
+                <StackLayout Grid.Row="6"
+                             Orientation="Horizontal"
+                             Spacing="0">
+                    <Switch x:Name="AgreementSwitch"
+                            AutomationId="AgreementSwitch"
+                            IsToggled="{Binding IsAgreementSwitchToggled, Mode=TwoWay}"
+                            OnColor="{DynamicResource SwitchOnColor}"
+                            VerticalOptions="Center"/>
+                    <Label Text="By moving this u agree to terms of service"
+                           Style="{StaticResource EntryLabel}"
+                           Margin="10,0,30,0"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center">
+                        <Label.Triggers>
+                            <DataTrigger Binding="{Binding IsAgreementSwitchInitalOrToggled}"
+                                     TargetType="Label"
+                                     Value="False">
+                                <Setter Property="TextColor"
+                                    Value="{StaticResource ErrorColor}"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsAgreementSwitchInitalOrToggled}"
+                                     TargetType="Label"
+                                     Value="True">
+                                <Setter Property="TextColor"
+                                        Value="{DynamicResource GrayDarkColor}"/>
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                </StackLayout>
+                <StackLayout Grid.Row="7">
+                    <!--Registration Button-->
+                    <Button x:Name="RegistrationButton"
+                            AutomationId="RegistrationButton"
+                            Text="Register"
+                            Style="{StaticResource PrimaryButton}"
+                            HorizontalOptions="Fill"
+                            VerticalOptions="Start">
+                        <Button.Behaviors>
+                            <behaviors:EventToCommandBehavior
+                                EventName="Clicked"
+                                EventParameterConverter="{StaticResource EventParameterConverter}"
+                                Command="{Binding ValidateFormCommand}"/>
+                        </Button.Behaviors>
+                    </Button>
+                </StackLayout>
+                <!--Registration Complete-->
+                <Label Grid.Row="0"
+                       Grid.RowSpan="8"
+                       IsVisible="{Binding IsRegistrationCompleteScreen}"
+                       Text="Thank you for the registration!"
+                       BackgroundColor="#8BBADF"
+                       FontFamily="Source Sans Pro"
+                       FontSize="18"
+                       TextColor="White"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       HorizontalOptions="Fill"
+                       VerticalOptions="Fill"/>
+            </Grid>
+        </ScrollView>
+    </base:BaseContentPage.FrameContent>
+</base:BaseContentPage>
